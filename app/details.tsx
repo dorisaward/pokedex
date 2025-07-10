@@ -4,6 +4,7 @@ import api from "./api";
 import { RootStackParamList } from "@/app/types/RootStackParamList";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import DisplayPokemonDetails from "@/app/components/DisplayPokemonDetails";
+import ErrorBoundary from "@/app/components/ErrorBoundary";
 
 export default function Details({
   route: {
@@ -28,9 +29,11 @@ export default function Details({
         alignItems: "center",
       }}
     >
-      <Suspense fallback={<Text>Loading...</Text>}>
-        <DisplayPokemonDetails pokemonPromise={pokemonPromise} />
-      </Suspense>
+      <ErrorBoundary>
+        <Suspense fallback={<Text>Loading...</Text>}>
+          <DisplayPokemonDetails pokemonPromise={pokemonPromise} />
+        </Suspense>
+      </ErrorBoundary>
     </View>
   );
 }
