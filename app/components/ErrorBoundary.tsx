@@ -9,11 +9,11 @@ interface ErrorBoundaryState {
 }
 
 const DisplayErrorMessage = () => {
-  const { navigate } = useNavigation<NavigationProp<RootStackParamList>>();
+  const { goBack } = useNavigation<NavigationProp<RootStackParamList>>();
   return (
     <>
       <Text>Are you sure that&#39;s how you spell it?</Text>
-      <Button onPress={() => navigate("Search")} title={"back"} />
+      <Button onPress={goBack} title={"back"} />
     </>
   );
 };
