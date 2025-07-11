@@ -15,3 +15,7 @@
    ```
 
 3. Download the expo go app on ios or android and scan the QR code, or open http://localhost:8081/ in your browser
+
+## TODO
+
+- Solve the problem of the jest tests failing after the tests have passed.

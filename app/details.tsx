@@ -1,6 +1,6 @@
 import { Text, View } from "react-native";
 import { Suspense, useEffect, useState } from "react";
-import api from "./api";
+import api from "@/app/api";
 import { RootStackParamList } from "@/app/types/RootStackParamList";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import DisplayPokemonDetails from "@/app/components/DisplayPokemonDetails";
@@ -11,9 +11,7 @@ export default function Details({
     params: { pokemonName },
   },
 }: NativeStackScreenProps<RootStackParamList, "Details">) {
-  const [pokemonPromise, setPokemonPromise] = useState<Promise<Response>>(
-    api.fetchPokemon(pokemonName),
-  );
+  const [pokemonPromise, setPokemonPromise] = useState<Promise<Response>>();
 
   useEffect(() => {
     if (pokemonName) {

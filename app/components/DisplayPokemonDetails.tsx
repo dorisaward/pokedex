@@ -5,8 +5,11 @@ import parseResponse from "@/app/types/Pokemon";
 const DisplayPokemonDetails = ({
   pokemonPromise,
 }: {
-  pokemonPromise: Promise<Response>;
+  pokemonPromise?: Promise<Response>;
 }) => {
+  if (!pokemonPromise) {
+    return null;
+  }
   const pokemon = use(pokemonPromise);
   const { name, species, sprites, stats, id, weight, height } =
     parseResponse(pokemon);
