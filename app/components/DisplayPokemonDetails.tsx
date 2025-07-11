@@ -16,7 +16,7 @@ const DisplayPokemonDetails = ({
     return null;
   }
   const pokemon = use(pokemonPromise);
-  const { name, species, sprites, stats, id, weight, height } =
+  const { name, species, sprites, stats, id, weight, height, game_indices } =
     parseResponse(pokemon);
 
   return (
@@ -48,6 +48,7 @@ const DisplayPokemonDetails = ({
       ))}
       <Text>Weight: {weight}</Text>
       <Text>Height: {height}</Text>
+      <Text>Number of games {name} has been in: {game_indices.length}</Text>
     </View>
   );
 };

@@ -45,6 +45,16 @@ const pokemon = z.looseObject({
   }),
 
   /**
+   * A list of the games the Pokémon appeared in
+   */
+  game_indices: z.array(z.looseObject({
+    /**
+     * The id of the game the Pokemon appeared in
+     * */
+    game_index: z.number(),
+  })),
+
+  /**
    * The stats of the Pokemon
    */
   stats: z.array(
