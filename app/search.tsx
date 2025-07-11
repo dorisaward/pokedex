@@ -11,7 +11,7 @@ export default function Search() {
     if (!userInput) {
       return;
     }
-    navigate("Details", { pokemonName: userInput });
+    navigate("Details", { pokemonName: userInput.trim() });
   }, [userInput, navigate]);
   return (
     <View
