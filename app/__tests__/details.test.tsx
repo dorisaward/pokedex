@@ -1,5 +1,5 @@
 import Details from "@/app/details";
-import { RootStackParamList } from "@/app/types/RootStackParamList";
+import RootStackParamList from "@/app/types/RootStackParamList";
 import { RouteProp } from "@react-navigation/core";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { render, cleanup } from "@testing-library/react-native";
@@ -28,6 +28,7 @@ const mockPokemon: Pokemon = {
     },
   ],
   weight: 0,
+  game_indices: [],
 };
 
 jest.mock("@/app/components/DisplayPokemonDetails", () =>
@@ -45,6 +46,8 @@ jest.mock("@/app/components/ErrorBoundary", () =>
   // eslint-disable-next-line react/display-name
   (props: PropsWithChildren) => <>{props.children}</>,
 );
+
+jest.mock("expo-secure-store");
 
 describe("details", () => {
   it("renders", async () => {

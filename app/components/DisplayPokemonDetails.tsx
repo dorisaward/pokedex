@@ -1,23 +1,33 @@
 import { View, Text, Image, Button } from "react-native";
 import { use } from "react";
-import parseResponse from "@/app/types/Pokemon";
+import parseResponse, { Pokemon } from "@/app/types/Pokemon";
 import { NavigationProp } from "@react-navigation/core";
-import { RootStackParamList } from "@/app/types/RootStackParamList";
+import RootStackParamList from "@/app/types/RootStackParamList";
 import { useNavigation } from "expo-router";
+import save from "@/app/storage/save";
 
-const DisplayPokemonDetails = ({
-  pokemonPromise,
-}: {
-  pokemonPromise?: Promise<Response>;
-}) => {
-  const { navigate } = useNavigation<NavigationProp<RootStackParamList>>();
+interface Props {
+  pokemonPromise?: Promise<Response | Pokemon | undefined>;
+  canSave: boolean;
+}
+
+const DisplayPokemonDetails = ({ pokemonPromise, canSave }: Props) => {
+  const { navigate, goBack } =
+    useNavigation<NavigationProp<RootStackParamList>>();
 
   if (!pokemonPromise) {
     return null;
   }
-  const pokemon = use(pokemonPromise);
+
+  const pokemonResponse = use(pokemonPromise);
+  const pokemon: Pokemon | undefined = parseResponse(pokemonResponse);
+
+  if (!pokemon) {
+    return null;
+  }
+
   const { name, species, sprites, stats, id, weight, height, game_indices } =
-    parseResponse(pokemon);
+    pokemon;
 
   return (
     <View
@@ -25,13 +35,29 @@ const DisplayPokemonDetails = ({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
+        borderWidth: 1,
+        borderColor: "black",
+        margin: 20,
+        padding: 2,
+        width: "90%",
       }}
     >
       <Text>{name}</Text>
-      <Button
-        title={"Favourite " + name}
-        onPress={() => navigate("Favourites", { pokemonName: name })}
-      />
+      {canSave && (
+        <Button
+          title={"Favourite " + name}
+          onPress={() =>
+            save(name, pokemon)
+              .then(() => {
+                navigate("Favourites");
+              })
+              .catch((error) => {
+                console.error(JSON.stringify(error));
+                goBack();
+              })
+          }
+        />
+      )}
       {sprites.front_default && (
         <Image
           style={{ width: 200, height: 200 }}
@@ -48,7 +74,9 @@ const DisplayPokemonDetails = ({
       ))}
       <Text>Weight: {weight}</Text>
       <Text>Height: {height}</Text>
-      <Text>Number of games {name} has been in: {game_indices.length}</Text>
+      <Text>
+        Number of games {name} has been in: {game_indices.length}
+      </Text>
     </View>
   );
 };

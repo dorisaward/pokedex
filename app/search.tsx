@@ -1,7 +1,7 @@
-import { TextInput, View, Button } from "react-native";
+import { TextInput, SafeAreaView, Button } from "react-native";
 import { useCallback, useState } from "react";
 import { useNavigation } from "expo-router";
-import { RootStackParamList } from "@/app/types/RootStackParamList";
+import RootStackParamList from "@/app/types/RootStackParamList";
 import { NavigationProp } from "@react-navigation/core";
 
 export default function Search() {
@@ -14,10 +14,10 @@ export default function Search() {
     navigate("Details", { pokemonName: userInput.trim() });
   }, [userInput, navigate]);
   return (
-    <View
+    <SafeAreaView
       style={{
         flex: 1,
-        justifyContent: "center",
+        justifyContent: "space-evenly",
         alignItems: "center",
       }}
     >
@@ -25,8 +25,13 @@ export default function Search() {
         inputMode="text"
         placeholder="Enter a pokemon"
         onChangeText={setUserInput}
+        hitSlop={50}
       />
-      {userInput && <Button title={userInput} onPress={handleNavigation} />}
-    </View>
+      <Button title={"Search"} onPress={handleNavigation} />
+      <Button
+        title={"View Favourites"}
+        onPress={() => navigate("Favourites")}
+      />
+    </SafeAreaView>
   );
 }

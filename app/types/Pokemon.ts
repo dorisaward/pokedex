@@ -28,11 +28,6 @@ const pokemon = z.looseObject({
      * The front of the Pokemon
      */
     front_default: z.nullish(z.string()),
-
-    /**
-     * The shiny version of the front of the Pokemon
-     */
-    front_shiny: z.nullish(z.string()),
   }),
 
   /**
@@ -47,12 +42,14 @@ const pokemon = z.looseObject({
   /**
    * A list of the games the Pokémon appeared in
    */
-  game_indices: z.array(z.looseObject({
-    /**
-     * The id of the game the Pokemon appeared in
-     * */
-    game_index: z.number(),
-  })),
+  game_indices: z.array(
+    z.looseObject({
+      /**
+       * The id of the game the Pokemon appeared in
+       * */
+      game_index: z.number(),
+    }),
+  ),
 
   /**
    * The stats of the Pokemon
@@ -67,21 +64,14 @@ const pokemon = z.looseObject({
 
         url: z.string(),
       }),
-
-      /**
-       * The effort of the stat
-       */
-      effort: z.number(),
-
-      /**
-       * The base value of the stat
-       */
-      base_stat: z.number(),
     }),
   ),
 });
 
 export type Pokemon = z.infer<typeof pokemon>;
-const parseResponse = pokemon.parse;
+const parseResponse = (data: unknown): Pokemon | undefined => {
+  if (!data) return undefined;
+  return pokemon.parse(data);
+};
 
 export default parseResponse;

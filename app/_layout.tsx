@@ -1,5 +1,5 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { RootStackParamList } from "@/app/types/RootStackParamList";
+import RootStackParamList from "@/app/types/RootStackParamList";
 import Search from "@/app/search";
 import Details from "@/app/details";
 import Favourites from "@/app/favourites";

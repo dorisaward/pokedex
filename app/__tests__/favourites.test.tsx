@@ -1,5 +1,5 @@
 import Favourites from "@/app/favourites";
-import { RootStackParamList } from "@/app/types/RootStackParamList";
+import RootStackParamList from "@/app/types/RootStackParamList";
 import { RouteProp } from "@react-navigation/core";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { render, cleanup } from "@testing-library/react-native";

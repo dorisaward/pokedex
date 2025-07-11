@@ -1,5 +1,7 @@
-export type RootStackParamList = {
+type RootStackParamList = {
   Search: undefined;
   Details: { pokemonName: string };
-  Favourites: { pokemonName: string } | undefined;
+  Favourites: undefined;
 };
+
+export default RootStackParamList;

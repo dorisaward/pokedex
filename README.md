@@ -14,8 +14,11 @@
    npm start
    ```
 
-3. Download the expo go app on ios or android and scan the QR code, or open http://localhost:8081/ in your browser
+3. Download the expo go app on ios or android and scan the QR code
 
 ## TODO
 
-- Solve the problem of the jest tests failing after the tests have passed.
+- More test coverage
+- Pokemon name autocorrect when searching
+- Nidoran male & female could have better searchability
+- More appealing styling
