@@ -59,7 +59,7 @@
   "jest": {
     "preset": "jest-expo",
     "transformIgnorePatterns": [
-      "node_modules/(?!(@react-native|react-native|expo-modules-core|expo|expo-router|expo-asset|expo-constants|expo-linking|@react-navigation|jest-runtime)/)"
+      "node_modules/(?!(@react-native|react-native|expo-modules-core|expo|expo-router|expo-asset|expo-constants|expo-linking|@react-navigation|jest-runtime|expo-secure-store)/)"
     ]
   },
   "private": true
