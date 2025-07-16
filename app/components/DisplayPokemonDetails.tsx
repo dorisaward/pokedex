@@ -60,6 +60,7 @@ const DisplayPokemonDetails = ({ pokemonPromise, canSave }: Props) => {
       )}
       {sprites.front_default && (
         <Image
+          accessibilityLabel={"An image of " + pokemon.name}
           style={{ width: 200, height: 200 }}
           source={{
             uri: sprites.front_default,

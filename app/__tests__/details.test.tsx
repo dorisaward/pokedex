@@ -8,29 +8,6 @@ import { PropsWithChildren } from "react";
 
 afterEach(cleanup);
 
-const mockPokemon: Pokemon = {
-  height: 0,
-  id: 0,
-  name: "Mock Pokemon",
-  species: {
-    name: "mock species",
-    url: "",
-  },
-  sprites: {},
-  stats: [
-    {
-      stat: {
-        name: "mock stat",
-        url: "",
-      },
-      effort: 0,
-      base_stat: 0,
-    },
-  ],
-  weight: 0,
-  game_indices: [],
-};
-
 jest.mock("@/app/components/DisplayPokemonDetails", () =>
   // eslint-disable-next-line react/display-name
   (props: { pokemonPromise: Promise<Pokemon> }) => (
