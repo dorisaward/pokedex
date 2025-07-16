@@ -1,10 +1,10 @@
-import { Button, FlatList, Text, SafeAreaView } from "react-native";
+import { Button, FlatList, SafeAreaView } from "react-native";
 import RootStackParamList from "@/app/types/RootStackParamList";
 import loadAll from "@/app/storage/load";
 import DisplayPokemonDetails from "@/app/components/DisplayPokemonDetails";
-import { Suspense } from "react";
 import { useNavigation } from "expo-router";
 import { NavigationProp, StackActions } from "@react-navigation/core";
+import SuspenseAndErrorBoundary from "@/app/components/SuspenseAndErrorBoundary";
 
 export default function Favourites() {
   const { dispatch } = useNavigation<NavigationProp<RootStackParamList>>();
@@ -23,10 +23,11 @@ export default function Favourites() {
       <FlatList
         data={loadAll()}
         renderItem={({ item }) => (
-          <Suspense fallback={<Text>Loading...</Text>}>
+          <SuspenseAndErrorBoundary>
             <DisplayPokemonDetails canSave={false} pokemonPromise={item} />
-          </Suspense>
+          </SuspenseAndErrorBoundary>
         )}
+        keyExtractor={(_, i) => i.toString()}
       />
     </SafeAreaView>
   );

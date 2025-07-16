@@ -69,6 +69,7 @@ exports[`favourites renders 1`] = `
     </View>
   </View>
   <RCTScrollView
+    data={[MockFunction]}
     getItem={[Function]}
     getItemCount={[Function]}
     keyExtractor={[Function]}

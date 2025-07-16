@@ -1,12 +1,26 @@
 import Favourites from "@/app/favourites";
 import { render, cleanup } from "@testing-library/react-native";
+import { PropsWithChildren } from "react";
 
 afterEach(cleanup);
 
-jest.mock("@/app/storage/load");
+jest.mock("@/app/components/DisplayPokemonDetails", () =>
+  // eslint-disable-next-line react/display-name
+  (props: unknown) => <>{JSON.stringify(props)}</>,
+);
+
+const mockLoadAll = jest.fn().mockResolvedValue([]);
+jest.mock("@/app/storage/load", () => () => mockLoadAll);
+
+jest.mock("@/app/components/SuspenseAndErrorBoundary", () =>
+  // eslint-disable-next-line react/display-name
+  (props: PropsWithChildren) => <>{props.children}</>,
+);
+
 jest.mock("expo-router", () => ({
-  dispatch: jest.fn(),
-  useNavigation: jest.fn(() => jest.fn()),
+  useNavigation: () => ({
+    dispatch: jest.fn(),
+  }),
 }));
 
 describe("favourites", () => {

@@ -1,4 +1,4 @@
-import { Component, PropsWithChildren } from "react";
+import { Component, PropsWithChildren, Suspense } from "react";
 import { Button, Text } from "react-native";
 import { useNavigation } from "expo-router";
 import { NavigationProp } from "@react-navigation/core";
@@ -18,7 +18,10 @@ const DisplayErrorMessage = () => {
   );
 };
 
-class ErrorBoundary extends Component<PropsWithChildren, ErrorBoundaryState> {
+class SuspenseAndErrorBoundary extends Component<
+  PropsWithChildren,
+  ErrorBoundaryState
+> {
   constructor(props: PropsWithChildren) {
     super(props);
     this.state = { hasError: false };
@@ -37,8 +40,12 @@ class ErrorBoundary extends Component<PropsWithChildren, ErrorBoundaryState> {
       return <DisplayErrorMessage />;
     }
 
-    return this.props.children;
+    return (
+      <Suspense fallback={<Text>Loading...</Text>}>
+        {this.props.children}
+      </Suspense>
+    );
   }
 }
 
-export default ErrorBoundary;
+export default SuspenseAndErrorBoundary;

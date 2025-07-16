@@ -1,10 +1,10 @@
-import { SafeAreaView, Text } from "react-native";
-import { Suspense, useEffect, useState } from "react";
-import api from "@/app/api";
+import { SafeAreaView } from "react-native";
+import { useEffect, useState } from "react";
+import api from "@/app/utils/api";
 import RootStackParamList from "@/app/types/RootStackParamList";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import DisplayPokemonDetails from "@/app/components/DisplayPokemonDetails";
-import ErrorBoundary from "@/app/components/ErrorBoundary";
+import SuspenseAndErrorBoundary from "@/app/components/SuspenseAndErrorBoundary";
 
 export default function Details({
   route: {
@@ -27,14 +27,9 @@ export default function Details({
         alignItems: "center",
       }}
     >
-      <ErrorBoundary>
-        <Suspense fallback={<Text>Loading...</Text>}>
-          <DisplayPokemonDetails
-            canSave={true}
-            pokemonPromise={pokemonPromise}
-          />
-        </Suspense>
-      </ErrorBoundary>
+      <SuspenseAndErrorBoundary>
+        <DisplayPokemonDetails canSave={true} pokemonPromise={pokemonPromise} />
+      </SuspenseAndErrorBoundary>
     </SafeAreaView>
   );
 }
