@@ -22,4 +22,3 @@
 - Pokemon name autocorrect when searching
 - Nidoran male & female could have better searchability
 - More appealing styling
-- Github action to run the tests, linting etc on push

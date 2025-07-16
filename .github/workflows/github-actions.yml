@@ -1,0 +1,21 @@
+name: continuous integration
+on: [push]
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Run Linters
+        run: npm lint
+
+      - name: Run Tests
+        run: npm test
